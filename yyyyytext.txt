@@ -1,0 +1,37 @@
+{
+  "name":"Bob Bloogs",
+  "email":"Bob@email.com",
+  "password":"mypassword",
+  "c_password":"mypassword"
+}
+
+
+http://localhost:8000/api/products
+
+
+Dj8wzjiPbgcl3mQfD8aIi9lKZGMNSFDEmfDIEzVe81551ea4
+
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+class SupplierFactory extends Factory
+{
+    protected $model = Supplier::class;
+
+    public function definition(): array
+    {
+        $name = fake('en_GB')->company();
+        $email = fake('en_GB')->username() . '@' . Str::slug($name) . '.com';
+        return [
+            'name' => $name,
+            'email' => fake('en_GB')->address(),
+            'phone' => fake('en_GB')->phoneNumber(),
+            'address' => $email
+        ];
+    }
+}
