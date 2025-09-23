@@ -7,8 +7,8 @@ use App\Http\Controllers\API\ProductController;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register');
-    // Route::post('login', 'login');
-    //Route::post('logout', 'logout')->middleware('auth:sanctum'); // Code for later on
+    Route::post('login', 'login');
+    Route::post('logout', 'logout')->middleware('auth:sanctum'); // Code for later on
 });
 
 Route::get('/user', function (Request $request) {
@@ -18,3 +18,14 @@ Route::get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('products', ProductController::class);
 });
+
+Route::apiResourse('suppliers', SupplierController::class)->missing(
+    function (Request $request) {
+        $response = [
+            'success' => false,
+            'message' => 'Supplier not found.',
+        ];
+
+        return response()->json($response, 404);
+    }
+);
