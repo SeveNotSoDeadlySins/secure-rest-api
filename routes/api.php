@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('products', ProductController::class);
 });
 
-Route::apiResourse('suppliers', SupplierController::class)->missing(
+Route::apiResource('suppliers', SupplierController::class)->missing(
     function (Request $request) {
         $response = [
             'success' => false,
